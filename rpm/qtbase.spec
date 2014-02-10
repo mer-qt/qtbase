@@ -532,7 +532,6 @@ This package contains the Qt5 development defaults package
 %prep
 %setup -q -n qt5-%{version}
 
-%build
 touch .git
 
 MAKEFLAGS=%{?_smp_mflags} \
@@ -592,6 +591,7 @@ MAKEFLAGS=%{?_smp_mflags} \
     -qreal float \
     -journald
 
+%build
 make %{?_smp_mflags}
 
 
