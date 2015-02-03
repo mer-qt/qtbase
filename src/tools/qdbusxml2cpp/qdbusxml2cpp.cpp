@@ -40,7 +40,6 @@
 ****************************************************************************/
 
 #include <qbytearray.h>
-#include <qdatetime.h>
 #include <qdebug.h>
 #include <qfile.h>
 #include <qfileinfo.h>
@@ -66,7 +65,6 @@ static QString parentClassName;
 static QString proxyFile;
 static QString adaptorFile;
 static QString inputFile;
-static QDateTime classCreationTime;
 static bool skipNamespaces;
 static bool verbose;
 static bool includeMocs;
@@ -220,10 +218,8 @@ static QDBusIntrospection::Interfaces readInput()
     QFile input(inputFile);
     if (inputFile.isEmpty() || inputFile == QLatin1String("-")) {
         input.open(stdin, QIODevice::ReadOnly);
-        classCreationTime = QDateTime::currentDateTime();
     } else {
         input.open(QIODevice::ReadOnly);
-        classCreationTime = QFileInfo(input).lastModified();
     }
 
     QByteArray data = input.readAll();
@@ -559,9 +555,8 @@ static void writeProxy(const QString &filename, const QDBusIntrospection::Interf
     } else {
         includeGuard = QLatin1String("QDBUSXML2CPP_PROXY");
     }
-    includeGuard = QString(QLatin1String("%1_%2"))
-                   .arg(includeGuard)
-                   .arg(classCreationTime.toTime_t());
+    includeGuard = QString(QLatin1String("%1"))
+                   .arg(includeGuard);
     hs << "#ifndef " << includeGuard << endl
        << "#define " << includeGuard << endl
        << endl;
@@ -867,9 +862,8 @@ static void writeAdaptor(const QString &filename, const QDBusIntrospection::Inte
     } else {
         includeGuard = QLatin1String("QDBUSXML2CPP_ADAPTOR");
     }
-    includeGuard = QString(QLatin1String("%1_%2"))
-                   .arg(includeGuard)
-                   .arg(QDateTime::currentDateTime().toTime_t());
+    includeGuard = QString(QLatin1String("%1"))
+                   .arg(includeGuard);
     hs << "#ifndef " << includeGuard << endl
        << "#define " << includeGuard << endl
        << endl;
