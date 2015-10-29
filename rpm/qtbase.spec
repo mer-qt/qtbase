@@ -645,45 +645,71 @@ ln -s %{_sysconfdir}/xdg/qtchooser/5.conf %{buildroot}%{_sysconfdir}/xdg/qtchoos
 
 #### Pre/Post section
 
-%post qtcore -p /sbin/ldconfig
-%postun qtcore -p /sbin/ldconfig
+%post qtcore
+/sbin/ldconfig || :
 
-%post qtdbus -p /sbin/ldconfig
-%postun qtdbus -p /sbin/ldconfig
+%postun qtcore
+/sbin/ldconfig || :
 
-%post qtsql -p /sbin/ldconfig
-%postun qtsql -p /sbin/ldconfig
+%post qtdbus
+/sbin/ldconfig || :
 
-%post qtnetwork -p /sbin/ldconfig
-%postun qtnetwork -p /sbin/ldconfig
+%postun qtdbus
+/sbin/ldconfig || :
 
-%post qtgui -p /sbin/ldconfig
-%postun qtgui -p /sbin/ldconfig
+%post qtsql
+/sbin/ldconfig || :
 
-%post qttest -p /sbin/ldconfig
-%postun qttest -p /sbin/ldconfig
+%postun qtsql
+/sbin/ldconfig || :
 
-%post qtopengl -p /sbin/ldconfig
-%postun qtopengl -p /sbin/ldconfig
+%post qtnetwork
+/sbin/ldconfig || :
 
-%post qtxml -p /sbin/ldconfig
-%postun qtxml -p /sbin/ldconfig
+%postun qtnetwork
+/sbin/ldconfig || :
 
-%post qtprintsupport -p /sbin/ldconfig
-%postun qtprintsupport -p /sbin/ldconfig
+%post qtgui
+/sbin/ldconfig || :
 
-%post qtwidgets -p /sbin/ldconfig
-%postun qtwidgets -p /sbin/ldconfig
+%postun qtgui
+/sbin/ldconfig || :
 
-%post qtconcurrent -p /sbin/ldconfig
-%postun qtconcurrent -p /sbin/ldconfig
+%post qttest
+/sbin/ldconfig || :
 
-#### File section
+%postun qttest
+/sbin/ldconfig || :
 
-# There is no naked qt5 package
-#%files
+%post qtopengl
+/sbin/ldconfig || :
 
+%postun qtopengl
+/sbin/ldconfig || :
 
+%post qtxml
+/sbin/ldconfig || :
+
+%postun qtxml
+/sbin/ldconfig || :
+
+%post qtprintsupport
+/sbin/ldconfig || :
+
+%postun qtprintsupport
+/sbin/ldconfig || :
+
+%post qtwidgets
+/sbin/ldconfig || :
+
+%postun qtwidgets
+/sbin/ldconfig || :
+
+%post qtconcurrent
+/sbin/ldconfig || :
+
+%postun qtconcurrent
+/sbin/ldconfig || :
 
 %files tools
 %defattr(-,root,root,-)
