@@ -72,6 +72,7 @@ BuildRequires:  pkgconfig(xrandr)
 BuildRequires:  pkgconfig(xt)
 BuildRequires:  pkgconfig(xtst)
 BuildRequires:  pkgconfig(xv)
+BuildRequires:  pkgconfig(xkbcommon)
 %endif
 
 %description
@@ -574,7 +575,11 @@ MAKEFLAGS=%{?_smp_mflags} \
     -system-zlib \
     -system-libpng \
     -system-libjpeg \
+%if %{with X11}
+    -system-xkbcommon \
+%else
     -no-xkbcommon \
+%endif
     -no-rpath \
     -optimized-qmake \
     -dbus-linked \
