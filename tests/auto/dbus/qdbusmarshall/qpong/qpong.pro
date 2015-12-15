@@ -1,5 +1,0 @@
-SOURCES = qpong.cpp
-TARGET = qpong
-QT = core dbus
-
-DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0
